@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- 可以了，v21也要设置这个属性 -->
+    <style name="AppTheme" parent="TranslucentStatus">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+
+        <item name="android:windowFullscreen">true</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+</resources>

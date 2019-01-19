@@ -1,0 +1,52 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="TranslucentStatus">
+        <!-- Customize your theme here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--禁止按钮上的文本自动大写，在APP主题中加入-->
+    <style name="ButtonTextStyle" parent="TextAppearance.AppCompat.Widget.Button">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TitleBarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/normal_88dp</item>
+        <item name="fitStatusBar">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="titleTextColor">@color/color_333</item>
+        <item name="android:textSize">@dimen/normal_36dp</item>
+        <!--<item name="leftDrawable">@mipmap/arrow_left</item>-->
+        <item name="showLeftImage">true</item>
+    </style>
+
+    <!--空白数据布局参数-->
+    <style name="EmptyViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="empty_layout">@layout/include_common_empty</item>
+        <item name="image_view_id">@+id/iv_empty_icon</item>
+        <item name="text_view_id">@+id/tv_empty_text</item>
+    </style>
+
+    <style name="CommonButtonStyle">
+        <item name="android:layout_width">@dimen/normal_400dp</item>
+        <item name="android:layout_height">@dimen/normal_90dp</item>
+        <item name="android:background">@drawable/selector_bdc8ce_click_r10</item>
+        <item name="android:textSize">@dimen/normal_36sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item><!--边框-->
+        <item name="android:windowIsFloating">true</item><!--是否浮现在activity之上-->
+        <item name="android:windowIsTranslucent">false</item><!--半透明-->
+        <item name="android:windowNoTitle">true</item><!--无标题-->
+        <item name="android:windowBackground">@color/transparent</item><!--背景透明-->
+        <item name="android:backgroundDimEnabled">false</item><!--模糊-->
+    </style>
+</resources>

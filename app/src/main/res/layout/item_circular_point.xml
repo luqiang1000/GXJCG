@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="18dp"
+    android:layout_height="18dp"
+    android:background="@drawable/shape_circular_black"
+    android:orientation="vertical" />

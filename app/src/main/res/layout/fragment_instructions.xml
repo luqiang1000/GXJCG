@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingRight="@dimen/normal_55dp"
+        android:textColor="@color/color_666" />
+
+    <Button
+        android:id="@+id/bt_back"
+        style="@style/CommonButtonStyle"
+        android:layout_marginBottom="@dimen/normal_40dp"
+        android:layout_marginLeft="@dimen/normal_60dp"
+        android:layout_marginTop="@dimen/normal_45dp"
+        android:text="@string/fanhui" />
+
+</LinearLayout>

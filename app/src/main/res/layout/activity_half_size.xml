@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/normal_750dp"
+        android:layout_height="match_parent">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:delay_time="5000" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_60dp"
+            android:layout_marginTop="@dimen/normal_45dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="@dimen/normal_240dp"
+                    android:layout_height="@dimen/normal_80dp"
+                    android:layout_marginRight="@dimen/normal_20dp"
+                    tools:src="@mipmap/logo_icon"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_25dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_28sp"
+                android:textStyle="bold"
+                tools:text="2018-06-18 12:26" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:visibility="visible">
+
+        <include layout="@layout/fragment_hs_main" />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <cn.dlc.guankungongxiangjicunji.main.widget.MyTitleBar
+            android:id="@+id/my_title_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:action="@string/cunwu"
+            app:action_visiable="true"
+            app:logo="@mipmap/icon_logo"
+            app:logo_visible="true"
+            app:name="@string/pinpaimingcheng"
+            app:name_visible="true"
+            app:step_view_visiable="true" />
+
+        <cn.dlc.guankungongxiangjicunji.main.widget.TopView
+            android:id="@+id/top_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:countdown="60"
+            app:left_icon="@mipmap/icon_1" />
+
+        <FrameLayout
+            android:id="@+id/fl_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</LinearLayout>

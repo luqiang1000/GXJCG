@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MyTitleBar">
+        <attr name="logo" format="reference" />
+        <attr name="name" format="string" />
+        <attr name="action" format="string" />
+        <attr name="action_visiable" format="boolean" />
+        <attr name="step" format="integer" />
+        <attr name="step_view_visiable" format="boolean" />
+        <attr name="logo_visible" format="boolean" />
+        <attr name="name_visible" format="boolean"/>
+    </declare-styleable>
+
+</resources>

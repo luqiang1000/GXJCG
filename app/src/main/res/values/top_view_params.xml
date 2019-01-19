@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TopView">
+        <attr name="left_icon" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="countdown" format="integer"/>
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/normal_895dp"
+    android:layout_height="@dimen/normal_456dp"
+    android:background="@drawable/shape_bg_white_r10">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_24dp"
+            android:layout_marginRight="@dimen/normal_24dp"
+            android:textColor="@color/color_333"
+            android:textSize="@dimen/normal_38sp"
+            android:text="正在获取支付二维码" />
+
+    </LinearLayout>
+
+
+</FrameLayout>
