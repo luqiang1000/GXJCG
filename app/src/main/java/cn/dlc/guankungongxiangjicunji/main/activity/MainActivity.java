@@ -1,31 +1,17 @@
 package cn.dlc.guankungongxiangjicunji.main.activity;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.hardware.display.DisplayManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -36,16 +22,24 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.request.RequestOptions;
+import com.dlc.vendingcabinets.Constant;
+import com.dlc.vendingcabinets.TemplateVendingCabinets;
+import com.dlc.vendingcabinets.mInterface.LogListener;
+
+import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import cn.dlc.commonlibrary.okgo.callback.Bean01Callback;
 import cn.dlc.commonlibrary.utils.PrefUtil;
 import cn.dlc.commonlibrary.utils.ResUtil;
-import cn.dlc.guankungongxiangjicunji.ConstantInf;
-import cn.dlc.guankungongxiangjicunji.HomeService;
 import cn.dlc.guankungongxiangjicunji.R;
 import cn.dlc.guankungongxiangjicunji.base.BaseActivity;
 import cn.dlc.guankungongxiangjicunji.main.MainHttp;
@@ -53,29 +47,7 @@ import cn.dlc.guankungongxiangjicunji.main.MainUrls;
 import cn.dlc.guankungongxiangjicunji.main.bean.BaseBean;
 import cn.dlc.guankungongxiangjicunji.main.bean.CountDownTiemBean;
 import cn.dlc.guankungongxiangjicunji.main.bean.MainInfoBean;
-import cn.dlc.guankungongxiangjicunji.main.bean.VideoBean;
 import cn.dlc.guankungongxiangjicunji.main.widget.ImageTextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.request.RequestOptions;
-import com.dlc.vendingcabinets.Constant;
-
-import com.dlc.vendingcabinets.TemplateActivity;
-import com.dlc.vendingcabinets.TemplateVendingCabinets;
-import com.dlc.vendingcabinets.mInterface.LogListener;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UTrack;
-import com.umeng.message.UmengMessageHandler;
-import com.umeng.message.entity.UMessage;
-
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -199,18 +171,14 @@ public class MainActivity extends BaseActivity {
         timeChangeReceiver = new TimeChangeReceiver();
         registerReceiver(timeChangeReceiver, intentFilter);
         mTvTime.setText(mSimpleDateFormat.format(System.currentTimeMillis()));
-
         showWaitingDialog("上传token中", true);
         uploadToken();
         getCountDownTime();
-
 //        serviceIntent = new Intent(this, HomeService.class);
 //        startService(serviceIntent);
-
         // getPermission();
 //        Intent intent = new Intent(this, HomeService.class);
 //        tService(intent);
-
     }
 
 
@@ -264,9 +232,7 @@ public class MainActivity extends BaseActivity {
         TemplateVendingCabinets.getVendingCabinets().setLogListener(new LogListener() {
             @Override
             public void onLog(String log) {
-
                 Log.i("Jim", "TCP返回信息" + log);
-
             }
         });
     }
@@ -277,7 +243,6 @@ public class MainActivity extends BaseActivity {
             public void onSuccess(CountDownTiemBean countDownTiemBean) {
                 PrefUtil.getDefault().saveLong("TOTAL_COUNT_DOWN_TIME", Long.valueOf(countDownTiemBean.getData().get(1).getValue()) * 1000);
             }
-
             @Override
             public void onFailure(String message, Throwable tr) {
                 showToast(message);
@@ -288,20 +253,17 @@ public class MainActivity extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         canClick = true;
         if(mSecondDisplay != null){
             mSecondDisplay.setActivity(this);
         }
-
     }
 
     private void initView() {
-
         mIvLogo.setImageResource(R.mipmap.logo_icon);
 //        mTvName.setText("共享寄存柜");
-
         MainHttp.get().getMainInfo(new Bean01Callback<MainInfoBean>() {
             @Override
             public void onSuccess(MainInfoBean mainInfoBean) {
@@ -402,9 +364,9 @@ public class MainActivity extends BaseActivity {
 //            mSecondDisplay.mVideo.stopPlayback();
 //        }
 
-        if(mSecondDisplay != null)
+        if(mSecondDisplay != null) {
             mSecondDisplay.cancel();
-
+        }
     }
 
 

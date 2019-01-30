@@ -1,12 +1,27 @@
 package cn.dlc.guankungongxiangjicunji;
 
-import android.app.Notification;
 import android.content.Context;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
-import android.util.Log;
+
+import com.danikula.videocache.HttpProxyCacheServer;
+import com.dlc.vendingcabinets.Constant;
+import com.liulishuo.filedownloader.FileDownloader;
+import com.lzy.okgo.cookie.CookieJarImpl;
+import com.lzy.okgo.cookie.store.SPCookieStore;
+import com.squareup.leakcanary.LeakCanary;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.analytics.MobclickAgent.EScenarioType;
+import com.umeng.commonsdk.UMConfigure;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import cn.dlc.commonlibrary.okgo.OkGoWrapper;
 import cn.dlc.commonlibrary.okgo.exception.ApiException;
 import cn.dlc.commonlibrary.okgo.interceptor.ErrorInterceptor;
@@ -16,27 +31,8 @@ import cn.dlc.commonlibrary.utils.PrefUtil;
 import cn.dlc.commonlibrary.utils.ResUtil;
 import cn.dlc.commonlibrary.utils.ScreenUtil;
 import cn.dlc.commonlibrary.utils.SystemUtil;
-import cn.dlc.guankungongxiangjicunji.base.BaseBean;
-import cn.dlc.guankungongxiangjicunji.main.MainUrls;
 import cn.dlc.guankungongxiangjicunji.main.widget.CountDownTimerUtils;
-import com.danikula.videocache.HttpProxyCacheServer;
-import com.dlc.vendingcabinets.Constant;
-import com.liulishuo.filedownloader.FileDownloader;
-import com.lzy.okgo.cookie.CookieJarImpl;
-import com.lzy.okgo.cookie.store.SPCookieStore;
-import com.squareup.leakcanary.LeakCanary;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.crashreport.CrashReport;
-import com.umeng.commonsdk.UMConfigure;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UmengMessageHandler;
-import com.umeng.message.entity.UMessage;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import okhttp3.OkHttpClient;
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * 存放网络请求地址
@@ -63,7 +59,8 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        initUM();
+//        initUM();
+        initUMeng();
         FileDownloader.setupOnApplicationOnCreate(this);
         sInstance = this;
         Constant.MACNO = getPackageName() + "_" + android.os.Build.SERIAL;//测试设备号;
@@ -104,41 +101,50 @@ public class App extends MultiDexApplication {
         }
         LeakCanary.install(this);
 
-        initBugly();
+//        initBugly();
 
     }
-
+    private void initUMeng() {
+        //友盟
+        //调试日志
+        UMConfigure.setLogEnabled(true);
+        //初始化
+        UMConfigure.init(this, "5c42da35f1f55613b1000ce7", "AndroidUmeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        MobclickAgent.setScenarioType(this, EScenarioType.E_UM_NORMAL);
+        // 将默认Session间隔时长改为60秒。
+        MobclickAgent.setSessionContinueMillis(1000 * 60);
+    }
     /**
      * 初始化友盟
      */
     public void initUM() {
-        UMConfigure.init(this, "5b3733038f4a9d280e0001b8", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "a7e7dc6cd789cf45f92c1fa2676e5126");
-        PushAgent mPushAgent = PushAgent.getInstance(this);
-        //注册推送服务，每次调用register方法都会回调该接口
-        mPushAgent.register(new IUmengRegisterCallback() {
-
-            @Override
-            public void onSuccess(String deviceToken) {
-                //注册成功会返回device token
-                Log.i("Jim1", deviceToken);
-                MainUrls.umToken = deviceToken;
-            }
-
-            @Override
-            public void onFailure(String s, String s1) {
-                Log.i("Jim", s + "----" + s1);
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        initUM();
-                    }
-                },5000);
-
-            }
-        });
-
-        //修改友盟notify
-        initUMengMessageHandler(mPushAgent);
+//        UMConfigure.init(this, "5b3733038f4a9d280e0001b8", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, "a7e7dc6cd789cf45f92c1fa2676e5126");
+//        PushAgent mPushAgent = PushAgent.getInstance(this);
+//        //注册推送服务，每次调用register方法都会回调该接口
+//        mPushAgent.register(new IUmengRegisterCallback() {
+//
+//            @Override
+//            public void onSuccess(String deviceToken) {
+//                //注册成功会返回device token
+//                Log.i("Jim1", deviceToken);
+//                MainUrls.umToken = deviceToken;
+//            }
+//
+//            @Override
+//            public void onFailure(String s, String s1) {
+//                Log.i("Jim", s + "----" + s1);
+//                mHandler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        initUM();
+//                    }
+//                },5000);
+//
+//            }
+//        });
+//
+//        //修改友盟notify
+//        initUMengMessageHandler(mPushAgent);
     }
 
 
@@ -199,23 +205,23 @@ public class App extends MultiDexApplication {
         return (App) context.getApplicationContext();
     }
 
-    private void initUMengMessageHandler(PushAgent mPushAgent) {
-        UmengMessageHandler messageHandler = new UmengMessageHandler() {
-            @Override
-            public Notification getNotification(Context context, UMessage msg) {
-                switch (msg.builder_id) {
-                    default:
-                        Log.i("Jim1","收到信息");
-                        PrefUtil.getDefault().putBoolean("isRead", false).apply();
-                        //默认为0，若填写的builder_id并不存在，也使用默认。
-                        EventBus.getDefault().post(new BaseBean());
-                        return super.getNotification(context, msg);
-                }
-            }
-
-        };
-
-        mPushAgent.setMessageHandler(messageHandler);
-    }
+//    private void initUMengMessageHandler(PushAgent mPushAgent) {
+//        UmengMessageHandler messageHandler = new UmengMessageHandler() {
+//            @Override
+//            public Notification getNotification(Context context, UMessage msg) {
+//                switch (msg.builder_id) {
+//                    default:
+//                        Log.i("Jim1","收到信息");
+//                        PrefUtil.getDefault().putBoolean("isRead", false).apply();
+//                        //默认为0，若填写的builder_id并不存在，也使用默认。
+//                        EventBus.getDefault().post(new BaseBean());
+//                        return super.getNotification(context, msg);
+//                }
+//            }
+//
+//        };
+//
+//        mPushAgent.setMessageHandler(messageHandler);
+//    }
 
 }
