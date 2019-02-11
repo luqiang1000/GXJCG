@@ -1,24 +1,14 @@
 package cn.dlc.guankungongxiangjicunji.hs;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.dlc.guankungongxiangjicunji.main.widget.ImageTextView;
 import cn.dlc.guankungongxiangjicunji.R;
 import cn.dlc.guankungongxiangjicunji.base.BaseFragment;
-import cn.dlc.guankungongxiangjicunji.main.activity.MainActivity;
-import cn.dlc.guankungongxiangjicunji.main.widget.ImageTextView;
 
 /**
  * Created by Administrator on 2018/7/24/024.

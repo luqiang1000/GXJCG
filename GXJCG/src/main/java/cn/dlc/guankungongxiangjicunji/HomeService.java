@@ -3,21 +3,11 @@ package cn.dlc.guankungongxiangjicunji;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.hardware.display.DisplayManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.view.Display;
-import android.view.WindowManager;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
-
-import cn.dlc.commonlibrary.utils.PrefUtil;
-import cn.dlc.guankungongxiangjicunji.main.activity.MainActivity;
-import cn.dlc.guankungongxiangjicunji.main.activity.SecondDisplay;
 
 public class HomeService extends Service {
 

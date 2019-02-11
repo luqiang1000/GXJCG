@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="cn.dlc.gxjcg">
+    package="cn.dlc.guankungongxiangjicunji">
     
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -30,7 +30,7 @@
     
     <application
         android:name=".App"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/logo_icon"
         android:label="@string/real_app_name"
         android:persistent="true"
