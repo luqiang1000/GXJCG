@@ -1,0 +1,35 @@
+<resources>
+    <string name="real_app_name">共享寄存柜</string>
+
+    <string name="pinpaimingcheng">万众存</string>
+    <string name="cunwu">存物</string>
+    <string name="quwu">取物</string>
+    <string name="s">s</string>
+
+    <!--使用说明-->
+    <string name="service_phone_">客服电话：%s</string>
+    <string name="shiyongshuoming">使用说明</string>
+    <string name="shiyongshuomingxiangqing">尊敬的用户，请选择需要阅读的使用说明：</string>
+    <string name="zicunziqu">自存自取</string>
+    <string name="yupengyoujiaojiewupin">与朋友交接物品</string>
+    <string name="songjingxiliwu">送惊喜礼物</string>
+    <string name="butongyibingtuichu">不同意并退出</string>
+    <string name="tongyibingjixu">同意并继续</string>
+    <string name="anquanshiyongxuzhi">安全使用须知</string>
+    <string name="qingxuanzeguiziguige">请选择您需要的柜子规格</string>
+    <string name="keyongshuliang">可用数量：</string>
+    <string name="qingxuanzeshiyongfangshi">请选择使用方式</string>
+    <string name="fanhui">返回</string>
+    <string name="qingshurushoujihaomahesuijimima">请输入手机号和随机密码</string>
+    <string name="qingxuanzezhifuleixing">请选择支付类型</string>
+    <string name="qingfukuan">请付款</string>
+    <string name="jihaomengyidakai_">%s号柜门已打开，请存物并关闭柜门</string>
+    <string name="shuashenfenzheng">刷身份证</string>
+    <string name="shezhimima">设置密码</string>
+    <string name="zunjingdeyonghu">尊敬的用户，请将您的身份证置于读卡区！</string>
+    <string name="zhengzaiduqushenfenzhengxinxi">正在读取身份证信息，请勿移动身份证件...</string>
+    <string name="shenfengzhengduquwanbi">身份证读取完毕，请收好您的证件！</string>
+    <string name="zunjingdexiansheng">尊敬的%s先生/女士，您好~</string>
+    <string name="quwujihaomenyidakai_">%s号柜门已开，取物后请及时关闭柜门，以免产生不必要的费用！</string>
+    
+</resources>

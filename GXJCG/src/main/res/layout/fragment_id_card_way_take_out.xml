@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/normal_30dp"
+        android:layout_marginBottom="@dimen/normal_30dp"
+        android:layout_marginLeft="@dimen/normal_55dp"
+        android:layout_marginRight="@dimen/normal_55dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/shape_e5e5e5_r10">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/normal_50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/normal_60dp"
+                android:textColor="@color/color_FA8D0D"
+                android:textSize="@dimen/normal_32sp"
+                android:layout_marginTop="@dimen/normal_20dp"
+                android:text="输入您之前设置的开柜密码"/>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_000"
+                android:textSize="@dimen/normal_34sp"
+                android:layout_marginBottom="@dimen/normal_60dp"
+                android:singleLine="true"
+                tools:text="@string/zunjingdexiansheng"/>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_000"
+                    android:textSize="@dimen/normal_34sp"
+                    android:layout_marginRight="@dimen/normal_20dp"
+                    android:singleLine="true"
+                    android:text="请输入您的开柜密码"/>
+                <EditText
+                    android:id="@+id/et_password"
+                    android:layout_width="@dimen/normal_520dp"
+                    android:layout_height="@dimen/normal_80dp"
+                    android:background="@drawable/shape_e5e5e5_r10"
+                    android:maxLength="5"
+                    android:inputType="phone"
+                    android:hint="5位数字密码"
+                    android:padding="@dimen/normal_20dp"
+                    android:textSize="@dimen/normal_28sp" />
+                
+            </LinearLayout>
+            
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_30dp"
+                android:orientation="horizontal">
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"/>
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="@dimen/normal_520dp"
+                    android:layout_height="@dimen/normal_80dp"
+                    android:background="@drawable/selector_main_click_r10"
+                    android:text="确认"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_36sp"/>
+            </LinearLayout>
+            
+        </LinearLayout>
+        
+        <View
+            android:layout_width="@dimen/normal_1dp"
+            android:layout_height="@dimen/normal_500dp"
+            android:layout_marginLeft="@dimen/normal_100dp"
+            android:layout_marginRight="@dimen/normal_100dp"
+            android:background="@color/color_e5e5e5"/>
+        
+        <cn.dlc.guankungongxiangjicunji.main.widget.CustomKeyboardView
+            android:id="@+id/customKeyboardView"
+            android:layout_gravity="center_vertical"
+            android:layout_width="@dimen/normal_362dp"
+            android:layout_height="@dimen/normal_484dp"/>
+       
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/normal_55dp"
+        android:paddingBottom="@dimen/normal_55dp"
+        android:paddingRight="@dimen/normal_55dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="@dimen/normal_400dp"
+            android:layout_height="@dimen/normal_90dp"
+            android:background="@drawable/selector_bdc8ce_click_r10"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_36sp"/>
+        
+    </LinearLayout>
+    
+</LinearLayout>
