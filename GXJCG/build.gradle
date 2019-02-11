@@ -19,7 +19,7 @@ android {
 
 
     defaultConfig {
-        applicationId "cn.dlc.guankungongxiangjicunji"
+        applicationId "com.android.gt.gxjcg"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 13
