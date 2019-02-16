@@ -18,6 +18,7 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -159,7 +160,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         //  getTime();
-
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         Constant.MACNO = ANDROID_ID;
 //        Constant.MACNO = "14564497c08614cf";

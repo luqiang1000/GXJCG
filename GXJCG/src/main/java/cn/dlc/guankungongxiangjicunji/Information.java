@@ -10,6 +10,6 @@ public class Information {
     public static final boolean SAVE_TEST_PASSWORD = true;
     
     //腾讯Bugly
-    public static String BuglyAppId = "300d815ab4"; //Bugly的AppId
+    public static String BuglyAppId = "300d815ab4";
 
 }

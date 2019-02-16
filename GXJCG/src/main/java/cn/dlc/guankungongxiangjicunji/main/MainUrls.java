@@ -1,7 +1,5 @@
 package cn.dlc.guankungongxiangjicunji.main;
 
-import cn.dlc.commonlibrary.okgo.OkGoWrapper;
-import cn.dlc.guankungongxiangjicunji.base.BaseUrls;
 
 /**
  * Created by yinqingxiang  on  2018/5/25.
