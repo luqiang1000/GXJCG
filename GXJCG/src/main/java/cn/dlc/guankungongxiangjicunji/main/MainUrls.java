@@ -6,11 +6,12 @@ package cn.dlc.guankungongxiangjicunji.main;
  * interface by
  */
 public class MainUrls {
-    public static String BASE_URL = "http://www.myqzkj.com";
+    //"http://www.myqzkj.com";
+    public static String BASE_URL = "http://47.106.183.95";
 
     public static String appendUrl(String url) {
         return BASE_URL + url;
     }
 
-    public static String umToken = "";//友盟token
+    public static String umToken = "5c42da35f1f55613b1000ce7";//友盟token
 }

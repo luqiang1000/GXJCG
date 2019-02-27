@@ -31,6 +31,7 @@ import cn.dlc.commonlibrary.utils.PrefUtil;
 import cn.dlc.commonlibrary.utils.ResUtil;
 import cn.dlc.commonlibrary.utils.ScreenUtil;
 import cn.dlc.commonlibrary.utils.SystemUtil;
+import cn.dlc.guankungongxiangjicunji.main.MainUrls;
 import cn.dlc.guankungongxiangjicunji.main.widget.CountDownTimerUtils;
 import okhttp3.OkHttpClient;
 
@@ -109,7 +110,7 @@ public class App extends MultiDexApplication {
         //调试日志
         UMConfigure.setLogEnabled(true);
         //初始化
-        UMConfigure.init(this, "5c42da35f1f55613b1000ce7", "AndroidUmeng", UMConfigure.DEVICE_TYPE_PHONE, "");
+        UMConfigure.init(this, MainUrls.umToken, "AndroidUmeng", UMConfigure.DEVICE_TYPE_PHONE, "");
         MobclickAgent.setScenarioType(this, EScenarioType.E_UM_NORMAL);
         // 将默认Session间隔时长改为60秒。
         MobclickAgent.setSessionContinueMillis(1000 * 60);

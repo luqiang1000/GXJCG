@@ -1,7 +1,6 @@
 package cn.dlc.guankungongxiangjicunji.main.activity;
 
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -15,10 +14,8 @@ import com.zzhoujay.richtext.RichText;
 import butterknife.BindView;
 import cn.dlc.commonlibrary.utils.PrefUtil;
 import cn.dlc.commonlibrary.utils.ResUtil;
-import cn.dlc.guankungongxiangjicunji.ConstantInf;
 import cn.dlc.guankungongxiangjicunji.R;
 import cn.dlc.guankungongxiangjicunji.base.BaseActivity;
-import cn.dlc.guankungongxiangjicunji.main.MainUrls;
 import cn.dlc.guankungongxiangjicunji.main.fragment.take_out_fragment.TakeOutIdCardWayFragment;
 import cn.dlc.guankungongxiangjicunji.main.fragment.take_out_fragment.TakeOutIdentifyIdCardFragment;
 import cn.dlc.guankungongxiangjicunji.main.fragment.take_out_fragment.TakeOutOpenCabinetFragment;
@@ -32,25 +29,20 @@ import cn.dlc.guankungongxiangjicunji.main.widget.CountDownTimerUtils;
 import cn.dlc.guankungongxiangjicunji.main.widget.MyTitleBar;
 import cn.dlc.guankungongxiangjicunji.main.widget.TopView;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by wuyufeng on 2018/6/22.
  */
 public class TakeOutActivity extends BaseActivity {
-
+    
     @BindView(R.id.my_title_bar)
     MyTitleBar mMyTitleBar;
     @BindView(R.id.container)
     FrameLayout mContainer;
     @BindView(R.id.top_view)
     TopView mTopView;
-
+    
     private MediaPlayer mMediaPlayer;
-
+    
     private CountDownTimerUtils mCountDownTimerUtils;
     private TakeOutPhoneWayFragment mTakeOutPhoneWayFragment;
     private TakeOutSafeGuideFragment mTakeOutSafeGuideFragment;
@@ -61,56 +53,57 @@ public class TakeOutActivity extends BaseActivity {
     private TakeOutPayFragment mTakeOutPayFragment;
     private TakeOutIdentifyIdCardFragment mTakeOutIdentifyIdCardFragment;
     private TakeOutIdCardWayFragment mTakeOutIdCardWayFragment;
-
+    
     public TakeOutPhoneWayFragment getTakeOutPhoneWayFragment() {
         return mTakeOutPhoneWayFragment;
     }
-
+    
     public TakeOutSafeGuideFragment getTakeOutSafeGuideFragment() {
         return mTakeOutSafeGuideFragment;
     }
-
+    
     public TakeOutSelectUseWayFragment getTakeOutSelectUseWayFragment() {
         return mTakeOutSelectUseWayFragment;
     }
-
+    
     public TakeOutSelectPayWayFragment getTakeOutSelectPayWayFragment() {
         return mTakeOutSelectPayWayFragment;
     }
-
+    
     public TakeOutSaveSucceedFragment getTakeOutSaveSucceedFragment() {
         return mTakeOutSaveSucceedFragment;
     }
-
+    
     public TakeOutPayFragment getTakeOutPayFragment() {
         return mTakeOutPayFragment;
     }
-
+    
     public TakeOutOpenCabinetFragment getTakeOutOpenCabinetFragment() {
         return mTakeOutOpenCabinetFragment;
     }
-
+    
     public TakeOutIdentifyIdCardFragment getTakeOutIdentifyIdCardFragment() {
         return mTakeOutIdentifyIdCardFragment;
     }
-
+    
     public TakeOutIdCardWayFragment getTakeOutIdCardWayFragment() {
         return mTakeOutIdCardWayFragment;
     }
-
+    
     @Override
     protected int getLayoutID() {
         return R.layout.activity_take_out;
     }
-
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initCountDownUtil();
         initFragment();
-        if(MainActivity.mSecondDisplay != null)
+        if (MainActivity.mSecondDisplay != null) {
             MainActivity.mSecondDisplay.setActivity(this);
+        }
     }
 
 //    public void playMedia(String name){
@@ -133,10 +126,9 @@ public class TakeOutActivity extends BaseActivity {
 //        }
 //
 //    }
-
-
+    
+    
     private void initCountDownUtil() {
-
         mCountDownTimerUtils = new CountDownTimerUtils().getCountDownTimer()
                 .setMillisInFuture(PrefUtil.getDefault().getLong("TOTAL_COUNT_DOWN_TIME", 0L))
                 .setCountDownInterval(1000)
@@ -145,15 +137,16 @@ public class TakeOutActivity extends BaseActivity {
                     public void onFinish() {
                         finish();
                     }
-
+                    
                     @Override
                     public void onTick(long pMillisUntilFinished) {
-                        if(mTopView != null)
+                        if (mTopView != null) {
                             mTopView.setCountdown((int) pMillisUntilFinished / 1000);
+                        }
                     }
                 });
     }
-
+    
     private void initFragment() {
         mTakeOutSafeGuideFragment = new TakeOutSafeGuideFragment();
         mTakeOutSelectUseWayFragment = new TakeOutSelectUseWayFragment();
@@ -164,24 +157,24 @@ public class TakeOutActivity extends BaseActivity {
         mTakeOutSaveSucceedFragment = new TakeOutSaveSucceedFragment();
         mTakeOutIdentifyIdCardFragment = new TakeOutIdentifyIdCardFragment();
         mTakeOutIdCardWayFragment = new TakeOutIdCardWayFragment();
-
+        
         showFirstFragment();
     }
-
+    
     private void showFirstFragment() {
-        switchFragment(mTakeOutSafeGuideFragment,null);
+        switchFragment(mTakeOutSafeGuideFragment, null);
         setStep(1, false, false);
     }
-
+    
     /**
      * @param step
      * @param isQr
      * @param isIdCard 是否是刷身份证
      */
     public void setStep(int step, boolean isQr, boolean isIdCard) {
-        if(mMyTitleBar != null)
+        if (mMyTitleBar != null) {
             mMyTitleBar.setStep(step);
-
+        }
         mTopView.setVisibility(View.VISIBLE);
         if (step == 1) {
             mTopView.setTitle(ResUtil.getString(R.string.anquanshiyongxuzhi));
@@ -210,41 +203,42 @@ public class TakeOutActivity extends BaseActivity {
                 mTopView.setVisibility(View.GONE);
             }
         }
-
-
+        
+        
         if (step != 6) {
             mCountDownTimerUtils.start();
         } else {
             mCountDownTimerUtils.cancel();
         }
     }
-
+    
     public void startCountDownTime() {
         if (mCountDownTimerUtils != null) {
             mCountDownTimerUtils.start();
         }
     }
-
-    public void switchFragment(Fragment targetFragment,Bundle bundle) {
+    
+    public void switchFragment(Fragment targetFragment, Bundle bundle) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
-        if(bundle != null){
+        
+        if (bundle != null) {
             //设置传递参数
             targetFragment.setArguments(bundle);
         }
-        fragmentTransaction.replace(R.id.container,targetFragment);
+        fragmentTransaction.replace(R.id.container, targetFragment);
         fragmentTransaction.commitAllowingStateLoss();
     }
-
+    
     public void closeActivity() {
         finish();
     }
-
+    
     public void setTopViewText(String text) {
-        if(mTopView != null)
-        mTopView.setTitle(text);
+        if (mTopView != null) {
+            mTopView.setTitle(text);
+        }
     }
-
+    
     @Override
     protected void onDestroy() {
         if (mCountDownTimerUtils != null) {

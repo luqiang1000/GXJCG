@@ -1,6 +1,5 @@
 package cn.dlc.guankungongxiangjicunji.main.bean;
 
-import java.util.List;
 
 public class BaseBean {
 
