@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.3"
     signingConfigs {
         config {
             keyAlias 'winds'
@@ -205,4 +204,5 @@ dependencies {
     implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     implementation 'com.liulishuo.filedownloader:library:1.7.5'
+    implementation files('libs/invs_usb.jar')
 }

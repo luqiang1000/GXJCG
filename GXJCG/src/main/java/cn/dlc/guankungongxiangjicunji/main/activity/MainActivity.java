@@ -18,12 +18,12 @@ import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -56,10 +56,10 @@ import static java.lang.System.currentTimeMillis;
  * Created by wuyufeng on 2018/6/22.
  */
 public class MainActivity extends BaseActivity {
-
+    
     @BindView(R.id.iv_logo)
     ImageView mIvLogo;
-//    @BindView(R.id.tv_name)
+    //    @BindView(R.id.tv_name)
 //    TextView mTvName;
     @BindView(R.id.tv_time)
     TextView mTvTime;
@@ -91,15 +91,15 @@ public class MainActivity extends BaseActivity {
     TextView mTvQRCode2;
     @BindView(R.id.tv_device_no)
     TextView mTvDeviceNo;
-
+    
     public static SecondDisplay mSecondDisplay;
-
+    
     public static MediaPlayer mMediaPlayer = new MediaPlayer();
-
+    
     public static Context mContext;
-
+    
     private Intent serviceIntent;
-
+    
     private long exittime = 0;
     private SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
     //    private Handler mHandler = new Handler() {
@@ -112,21 +112,21 @@ public class MainActivity extends BaseActivity {
 //    };
     //private Handler mHandler = new Handler();
     private boolean canClick = true;//防止多次点击
-
+    
     private MyHandler mHandler = new MyHandler();
-
+    
     private static class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
         }
     }
-
-
+    
+    
     private TimeChangeReceiver timeChangeReceiver;
-
+    
     class TimeChangeReceiver extends BroadcastReceiver {
-
+        
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -144,16 +144,16 @@ public class MainActivity extends BaseActivity {
                     mTvTime.setText(mSimpleDateFormat.format(System.currentTimeMillis()));
                     break;
             }
-
+            
         }
     }
-
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected int getLayoutID() {
         return R.layout.activity_main;
     }
-
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +163,7 @@ public class MainActivity extends BaseActivity {
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         Constant.MACNO = ANDROID_ID;
 //        Constant.MACNO = "14564497c08614cf";
-        mTvDeviceNo.setText("设备号: " + Constant.MACNO );
+        mTvDeviceNo.setText("设备号: " + Constant.MACNO);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);//每分钟变化
         intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);//设置了系统时区o
@@ -180,26 +180,26 @@ public class MainActivity extends BaseActivity {
 //        Intent intent = new Intent(this, HomeService.class);
 //        tService(intent);
     }
-
-
-
+    
+    
     private void uploadToken() {
         mHandler.postDelayed(() -> {
+            LogUtils.e(MainUrls.umToken + " " + PrefUtil.getDefault().getString("Type", "FULL"));
             if (TextUtils.isEmpty(MainUrls.umToken)) {
                 uploadToken();
             } else {
-                Log.i("Jim","111111");
+                Log.i("Jim", "to uploadToken");
                 MainHttp.get().uploadUMToken(MainUrls.umToken, Constant.MACNO, new Bean01Callback<BaseBean>() {
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
                     @Override
                     public void onSuccess(BaseBean baseBean) {
-                        Log.i("Jim","111111");
+                        Log.i("Jim", baseBean.toString());
                         dismissWaitingDialog();
-                        connectTcp();
+//                        connectTcp();
                         initView();
                         showSecondDisplay();
                     }
-
+                    
                     @Override
                     public void onFailure(String message, Throwable tr) {
                         showOneToast(message);
@@ -207,60 +207,66 @@ public class MainActivity extends BaseActivity {
                     }
                 });
             }
-
+            
         }, 1000);
-
-
+        
+        
     }
-
+    
     private void connectTcp() {
 //        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
 //        Constant.MACNO = ANDROID_ID;
 ////        Constant.MACNO = "14564497c08614cf";
 //        mTvDeviceNo.setText("设备号: " + Constant.MACNO );
         //双屏，则用双屏串口地址，否则用USB地址
-        if("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))){
+        if ("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
             //{"data":{"water":"20180804150726962818206","status":-1,"oid":"20180804150726962818206"},"type":"openDoor","msg":"出货失败，未检测到商品掉落","macno":"b44b60fa8b62ecd4"}
             Constant.DEVICE_PATH = "/dev/ttyS1";
-        }else{
+        } else {
             Constant.DEVICE_PATH = "/dev/ttyS0";
         }
         Constant.ADDRESS = "39.108.111.205";
-        TemplateVendingCabinets.getVendingCabinets().start(Constant.MACNO, Constant.ADDRESS, Constant.PORT, Constant.DEVICE_PATH, Constant.BAUDRATE);
-        //设置列数
-        TemplateVendingCabinets.getVendingCabinets().setColumns(0,6);
-        TemplateVendingCabinets.getVendingCabinets().setLogListener(new LogListener() {
-            @Override
-            public void onLog(String log) {
-                Log.i("Jim", "TCP返回信息" + log);
-            }
-        });
+        try {
+//            Constant.ADDRESS = "47.106.183.95";
+            TemplateVendingCabinets.getVendingCabinets().start(Constant.MACNO, Constant.ADDRESS, Constant.PORT, Constant.DEVICE_PATH, Constant.BAUDRATE);
+            //设置列数
+            TemplateVendingCabinets.getVendingCabinets().setColumns(0, 6);
+            TemplateVendingCabinets.getVendingCabinets().setLogListener(new LogListener() {
+                @Override
+                public void onLog(String log) {
+                    LogUtils.e("TCP返回信息" + log);
+                }
+            });
+        } catch (Exception e) {
+            LogUtils.e(e.getMessage());
+        }
     }
-
+    
     private void getCountDownTime() {
         MainHttp.get().countDowntime(new Bean01Callback<CountDownTiemBean>() {
             @Override
             public void onSuccess(CountDownTiemBean countDownTiemBean) {
                 PrefUtil.getDefault().saveLong("TOTAL_COUNT_DOWN_TIME", Long.valueOf(countDownTiemBean.getData().get(1).getValue()) * 1000);
             }
+            
             @Override
             public void onFailure(String message, Throwable tr) {
                 showToast(message);
             }
         });
     }
-
-
+    
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void onResume() {
         super.onResume();
         canClick = true;
-        if(mSecondDisplay != null){
+        if (mSecondDisplay != null) {
             mSecondDisplay.setActivity(this);
         }
     }
-
+    
     private void initView() {
         mIvLogo.setImageResource(R.mipmap.logo_icon);
 //        mTvName.setText("共享寄存柜");
@@ -288,17 +294,15 @@ public class MainActivity extends BaseActivity {
                         .apply(new RequestOptions().transform(new CenterCrop()))
                         .into(mIvQrAli);
             }
-
+            
             @Override
             public void onFailure(String message, Throwable tr) {
                 showOneToast(message);
             }
         });
     }
-
-
-
-
+    
+    
     @OnClick({R.id.btn_save, R.id.btn_take_out, R.id.btn_guide})
     public void onViewClicked(View view) {
         Long value = PrefUtil.getDefault().getLong("TOTAL_COUNT_DOWN_TIME", 0L);
@@ -314,7 +318,7 @@ public class MainActivity extends BaseActivity {
                     startActivity(SaveActivity.class);
                 }
 //                playMedia("save10");
-
+                
                 break;
             case R.id.btn_take_out://取物
                 if (canClick) {
@@ -327,13 +331,12 @@ public class MainActivity extends BaseActivity {
                     canClick = false;
                     startActivity(ProductDescriptionActivity.class);
                 }
-
+                
                 break;
         }
     }
-
-
-
+    
+    
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -342,8 +345,8 @@ public class MainActivity extends BaseActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
+    
+    
     private void exit() {
         if ((currentTimeMillis() - exittime) > 1000) {
             showToast("再按一次退出程序");
@@ -352,8 +355,8 @@ public class MainActivity extends BaseActivity {
             finish();
         }
     }
-
-
+    
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onDestroy() {
@@ -363,13 +366,13 @@ public class MainActivity extends BaseActivity {
 //        if (mSecondDisplay != null && mSecondDisplay.mVideo != null) {
 //            mSecondDisplay.mVideo.stopPlayback();
 //        }
-
-        if(mSecondDisplay != null) {
+        
+        if (mSecondDisplay != null) {
             mSecondDisplay.cancel();
         }
     }
-
-
+    
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void showSecondDisplay() {
         DisplayManager mDisplayManager;// 屏幕管理类
@@ -378,7 +381,7 @@ public class MainActivity extends BaseActivity {
         Display[] displays = mDisplayManager.getDisplays();
 
 //        if (mSecondDisplay == null) {
-        if("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
+        if ("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
             mSecondDisplay = new SecondDisplay(MainActivity.this, displays[displays.length - 1], MainActivity.this);// displays[1]是副屏
             mSecondDisplay.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
             mSecondDisplay.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
@@ -386,37 +389,36 @@ public class MainActivity extends BaseActivity {
             mSecondDisplay.setActivity(MainActivity.this);
         }
 //        }
-
+    
     }
-
-
-
+    
+    
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return super.onTouchEvent(event);
     }
-
+    
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         return super.dispatchTouchEvent(ev);
     }
-
-    public static void playMedia(String name){
+    
+    public static void playMedia(String name) {
         try {
             Field idField = R.raw.class.getDeclaredField(name);
             int res = idField.getInt(idField);
-            if(mMediaPlayer.isPlaying()){
+            if (mMediaPlayer.isPlaying()) {
                 mMediaPlayer.stop();
                 mMediaPlayer.release();
-                mMediaPlayer = MediaPlayer.create(mContext,res);
-            }else{
-                mMediaPlayer=MediaPlayer.create(mContext, res);
+                mMediaPlayer = MediaPlayer.create(mContext, res);
+            } else {
+                mMediaPlayer = MediaPlayer.create(mContext, res);
             }
 //            mMediaPlayer.setDataSource(idF);
 //            mMediaPlayer.setDataSource(this, Uri.parse("android.resource://" + this.getPackageName() + "/raw/" + name));
             try {
 //                mMediaPlayer.prepare();
-
+            
             } catch (IllegalStateException e) {
                 e.printStackTrace();
             }
@@ -424,8 +426,8 @@ public class MainActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
-
+    
+    
 }
