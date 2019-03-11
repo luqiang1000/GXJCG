@@ -138,18 +138,15 @@ public class SelectSpecFragment extends BaseFragment {
                     }
                 }
             }
-
             @Override
             public void onFailure(String message, Throwable tr) {
                 showToast(message);
-                if ("FUll".equals(mType) || "NOID".equals(mType)) {
-                    mActivity.finish();
-                } else if ("HALF".equals(mType)) {
-                    ((HalfSizeActivty) mActivity).closeActivity();
-                }
-
+//                if ("FUll".equals(mType) || "NOID".equals(mType)) {
+//                    mActivity.finish();
+//                } else if ("HALF".equals(mType)) {
+//                    ((HalfSizeActivty) mActivity).closeActivity();
+//                }
             }
-
             @Override
             public void onFinish() {
                 super.onFinish();
@@ -159,7 +156,6 @@ public class SelectSpecFragment extends BaseFragment {
 
 
     }
-
 
     @OnClick({R.id.btn_back, R.id.ll_btn_small, R.id.ll_btn_middle, R.id.ll_btn_big})
     public void onViewClicked(View view) {
@@ -190,7 +186,6 @@ public class SelectSpecFragment extends BaseFragment {
 
                     }
                 }
-
                 break;
             case R.id.ll_btn_middle:
                 CabinetListBean.DataBean mDataBean1 = null;
@@ -211,31 +206,29 @@ public class SelectSpecFragment extends BaseFragment {
 
                 break;
             case R.id.ll_btn_big:
-                CabinetListBean.DataBean mDataBean2 = null;
-                for (int i = 0; i < mCabinetListBean.data.size(); i++) {
-                    if (mCabinetListBean.data.get(i).charging_info.keyname.equals("big")) {
-                        if(mCabinetListBean.data.get(i).macno_status == 1){
-                            if(mCabinetListBean.data.get(i).charging_restnum > 0){
-                                mDataBean2 = mCabinetListBean.data.get(i);
-                                switchFragment(mDataBean2);
-                            }else {
-                                showOneToast("暂无柜子可用!");
-                            }
-                        }else{
-                            showOneToast("设备维护中");
-                        }
-                    }
-                }
-
+                switchFragment(null);
+//                CabinetListBean.DataBean mDataBean2 = null;
+//                for (int i = 0; i < mCabinetListBean.data.size(); i++) {
+//                    if (mCabinetListBean.data.get(i).charging_info.keyname.equals("big")) {
+//                        if(mCabinetListBean.data.get(i).macno_status == 1){
+//                            if(mCabinetListBean.data.get(i).charging_restnum > 0){
+//                                mDataBean2 = mCabinetListBean.data.get(i);
+//                                switchFragment(mDataBean2);
+//                            }else {
+//                                showOneToast("暂无柜子可用!");
+//                            }
+//                        }else{
+//                            showOneToast("设备维护中");
+//                        }
+//                    }
+//                }
                 break;
         }
     }
 
     private void switchFragment(CabinetListBean.DataBean mDataBean) {
-
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("mDataBean", mDataBean);
-
         if ("FUll".equals(mType) || "NOID".equals(mType)) {
             ((SaveActivity) mActivity).switchFragment(((SaveActivity) mActivity).getSelectUseWayFragment(), mBundle);
             ((SaveActivity) mActivity).setStep(3, false, false);
@@ -243,8 +236,5 @@ public class SelectSpecFragment extends BaseFragment {
             ((HalfSizeActivty) mActivity).switchFragment(((HalfSizeActivty) mActivity).getSelectUseWayFragment(), mBundle);
             ((HalfSizeActivty) mActivity).setStep(3, false, false);
         }
-
     }
-
-
 }

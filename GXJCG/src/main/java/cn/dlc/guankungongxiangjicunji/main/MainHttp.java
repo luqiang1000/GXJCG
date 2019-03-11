@@ -45,7 +45,7 @@ public class MainHttp {
     //获取手机验证密码
     public void sendCode(String mobile, Bean01Callback<BaseBean> callback) {
         HttpParams httpParams = new HttpParams();
-        httpParams.put("platform", "ztsms");
+        httpParams.put("platform", "alisms");
         httpParams.put("mobile", mobile);
         httpParams.put("event", "pickupcode");
         mOkGoWrapper.post(MainUrls.appendUrl("/vv/sms/api/index/send"), null, httpParams, BaseBean.class, callback);

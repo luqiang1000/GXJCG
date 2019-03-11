@@ -37,36 +37,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="label">
-        
-        
+        <activity
+            android:name=".main.activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:excludeFromRecents="true"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"></activity>
         <activity
             android:name=".hs.HalfSizeActivty"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        <activity
-            android:name=".main.activity.MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <!--使用说明-->
         <activity
             android:name=".main.activity.ProductDescriptionActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         
         <!-- ============================bugly升级============================= -->
@@ -94,13 +86,11 @@
         <activity
             android:name=".main.activity.SaveActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <!--取物-->
         <activity
             android:name=".main.activity.TakeOutActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="landscape"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         
         <!--半屏-->

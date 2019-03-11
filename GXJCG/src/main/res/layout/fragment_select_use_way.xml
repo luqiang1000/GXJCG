@@ -2,68 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_margin="@dimen/normal_55dp"
         android:layout_weight="1"
+        android:background="@drawable/shape_e5e5e5_r10"
         android:gravity="center"
-        android:background="@drawable/shape_e5e5e5_r10">
+        android:orientation="horizontal">
         
         <FrameLayout
             android:id="@+id/fl_btn_phone"
             android:layout_width="@dimen/normal_660dp"
             android:layout_height="@dimen/normal_400dp"
             android:background="@mipmap/im_phone">
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normal_42sp"
                 android:layout_marginTop="@dimen/normal_100dp"
-                android:text="手机号验证"/>
+                android:text="手机号验证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_42sp" />
         </FrameLayout>
-
+        
         <FrameLayout
             android:id="@+id/fl_btn_id_card"
             android:layout_width="@dimen/normal_660dp"
             android:layout_height="@dimen/normal_400dp"
             android:layout_marginLeft="@dimen/normal_120dp"
-            android:background="@mipmap/im_idcard">
+            android:background="@mipmap/im_idcard"
+            android:visibility="gone">
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normal_42sp"
                 android:layout_marginTop="@dimen/normal_100dp"
-                android:text="身份证验证"/>
+                android:text="身份证验证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_42sp" />
         </FrameLayout>
     </LinearLayout>
     
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/normal_55dp"
-        android:paddingBottom="@dimen/normal_55dp"
-        android:paddingRight="@dimen/normal_55dp"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="@dimen/normal_400dp"
-            android:layout_height="@dimen/normal_90dp"
-            android:background="@drawable/selector_bdc8ce_click_r10"
-            android:text="返回"
-            android:textColor="@color/white"
-            android:textSize="@dimen/normal_36sp"/>
-        
-    </LinearLayout>
-    
+    <Button
+        android:id="@+id/btn_back"
+        style="@style/CommonButtonStyle"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/normal_45dp"
+        android:layout_marginRight="@dimen/normal_55dp"
+        android:layout_marginBottom="@dimen/normal_40dp"
+        android:text="返回主页" />
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:paddingLeft="@dimen/normal_55dp"-->
+    <!---->
+    <!--&gt;-->
+    <!---->
+    <!--<Button-->
+    <!--android:id="@+id/btn_back"-->
+    <!--android:layout_width="@dimen/normal_400dp"-->
+    <!--android:layout_height="@dimen/normal_90dp"-->
+    <!--android:background="@drawable/selector_bdc8ce_click_r10"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingRight="@dimen/normal_55dp"-->
+    <!--android:paddingBottom="@dimen/normal_55dp"-->
+    <!--android:text="返回"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/normal_36sp" />-->
+    <!--</LinearLayout>-->
+
 </LinearLayout>

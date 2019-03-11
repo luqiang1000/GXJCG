@@ -44,7 +44,6 @@ public class App extends MultiDexApplication {
     private static App sInstance;
     private Handler mUiHandler;
     public CountDownTimerUtils mCountDownTimerUtils;
-    Handler mHandler = new Handler();
 
     private HttpProxyCacheServer proxy;
 

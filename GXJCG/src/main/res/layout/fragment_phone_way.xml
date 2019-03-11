@@ -2,120 +2,129 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:background="@color/white"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
     
     
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/normal_55dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:background="@drawable/shape_e5e5e5_r10">
+        android:background="@drawable/shape_e5e5e5_r10"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/normal_50dp"
+            android:layout_marginTop="@dimen/normal_50dp"
             android:orientation="vertical">
+            
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_000"
-                    android:textSize="@dimen/normal_34sp"
                     android:layout_marginRight="@dimen/normal_20dp"
                     android:singleLine="true"
-                    android:text="手机号码"/>
+                    android:text="手机号码"
+                    android:textColor="@color/color_000"
+                    android:textSize="@dimen/normal_34sp" />
+                
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="@dimen/normal_520dp"
                     android:layout_height="@dimen/normal_80dp"
                     android:background="@drawable/shape_e5e5e5_r10"
-                    android:maxLength="11"
-                    android:inputType="phone"
                     android:hint="请输入手机号码"
+                    android:inputType="phone"
+                    android:maxLength="11"
                     android:padding="@dimen/normal_20dp"
                     android:textSize="@dimen/normal_28sp" />
-                
+            
             </LinearLayout>
-
+            
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/normal_30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+                
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/color_000"
-                    android:textSize="@dimen/normal_34sp"
                     android:layout_marginRight="@dimen/normal_20dp"
-                    android:text="随机密码"/>
+                    android:text="随机密码"
+                    android:textColor="@color/color_000"
+                    android:textSize="@dimen/normal_34sp" />
+                
                 <LinearLayout
                     android:layout_width="@dimen/normal_520dp"
                     android:layout_height="@dimen/normal_80dp"
                     android:background="@drawable/shape_e5e5e5_r10"
                     android:orientation="horizontal">
+                    
                     <EditText
                         android:id="@+id/et_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入随机密码"
+                        android:inputType="phone"
                         android:paddingLeft="@dimen/normal_20dp"
                         android:paddingTop="@dimen/normal_20dp"
                         android:paddingBottom="@dimen/normal_20dp"
                         android:singleLine="true"
-                        android:background="@null"
-                        android:inputType="phone"
-                        android:hint="请输入随机密码"
                         android:textSize="@dimen/normal_28sp" />
+                    
                     <View
                         android:layout_width="@dimen/normal_1dp"
                         android:layout_height="@dimen/normal_43dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/normal_10dp"
                         android:layout_marginRight="@dimen/normal_20dp"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/color_ddd"/>
-
+                        android:background="@color/color_ddd" />
+                    
                     <TextView
                         android:id="@+id/tv_get_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/color_75C4EC"
-                        android:textSize="@dimen/normal_26sp"
-                        android:paddingRight="@dimen/normal_15dp"
                         android:paddingTop="@dimen/normal_20dp"
+                        android:paddingRight="@dimen/normal_15dp"
                         android:paddingBottom="@dimen/normal_20dp"
-                        android:text="点击获取随机密码"/>
+                        android:text="点击获取随机密码"
+                        android:textColor="@color/color_75C4EC"
+                        android:textSize="@dimen/normal_26sp" />
                 </LinearLayout>
-                
+            
             </LinearLayout>
-
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_110dp"
+                android:text="温馨提示："
                 android:textColor="@color/color_000"
                 android:textSize="@dimen/normal_32sp"
-                android:layout_marginTop="@dimen/normal_110dp"
-                android:text="温馨提示："/>
-
+                android:visibility="gone" />
+            
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_20dp"
+                android:text="此随机密码在您取物时会再次用到，请妥善保管！"
                 android:textColor="@color/color_FA8D0D"
                 android:textSize="@dimen/normal_32sp"
-                android:layout_marginTop="@dimen/normal_20dp"
-                android:text="此随机密码在您取物时会再次用到，请妥善保管！"/>
-            
+                android:visibility="gone" />
+        
         </LinearLayout>
         
         <View
@@ -123,33 +132,36 @@
             android:layout_height="@dimen/normal_500dp"
             android:layout_marginLeft="@dimen/normal_100dp"
             android:layout_marginRight="@dimen/normal_100dp"
-            android:background="@color/color_e5e5e5"/>
+            android:background="@color/color_e5e5e5"
+            android:visibility="gone" />
         
         <cn.dlc.guankungongxiangjicunji.main.widget.CustomKeyboardView
             android:id="@+id/customKeyboardView"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-       
+            android:layout_width="@dimen/normal_362dp"
+            android:layout_height="@dimen/normal_484dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/normal_55dp" />
+    
+    
     </LinearLayout>
     
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/normal_55dp"
-        android:paddingBottom="@dimen/normal_55dp"
         android:paddingRight="@dimen/normal_55dp"
-        android:orientation="horizontal">
+        android:paddingBottom="@dimen/normal_55dp">
+        
         <Button
             android:id="@+id/btn_back"
             android:layout_width="@dimen/normal_400dp"
             android:layout_height="@dimen/normal_90dp"
+            android:layout_alignParentRight="true"
             android:background="@drawable/selector_bdc8ce_click_r10"
             android:text="返回"
             android:textColor="@color/white"
-            android:textSize="@dimen/normal_36sp"/>
-        
-    </LinearLayout>
+            android:textSize="@dimen/normal_36sp" />
     
+    </RelativeLayout>
+
 </LinearLayout>

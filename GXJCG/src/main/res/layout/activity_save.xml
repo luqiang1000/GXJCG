@@ -1,33 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
+    
     <cn.dlc.guankungongxiangjicunji.main.widget.MyTitleBar
         android:id="@+id/my_title_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:action="@string/cunwu"
-        app:action_visiable="true"
-        app:logo_visible="false"
         app:logo="@mipmap/ic_logo1"
-        app:step_view_visiable="true" />
-
+        app:logo_visible="false"
+        app:step_view_visiable="false" />
+    
+    <include
+        android:id="@+id/title_new"
+        layout="@layout/title_new" />
+    <!--app:action="@string/cunwu"-->
+    <!--app:action_visiable="true"-->
+    
+    
     <cn.dlc.guankungongxiangjicunji.main.widget.TopView
         android:id="@+id/top_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:countdown="60"
         app:left_icon="@mipmap/icon_1" />
-
+    
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" />
-
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="@dimen/normal_55dp"
+        android:paddingBottom="20dp"
+        android:text="客服电话:400-000-0000"
+        android:textStyle="bold" />
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.zzhoujay.richtext.RichText;
 
@@ -36,6 +37,8 @@ public class TakeOutActivity extends BaseActivity {
     
     @BindView(R.id.my_title_bar)
     MyTitleBar mMyTitleBar;
+    @BindView(R.id.title_new)
+    RelativeLayout title_new;
     @BindView(R.id.container)
     FrameLayout mContainer;
     @BindView(R.id.top_view)
@@ -219,6 +222,13 @@ public class TakeOutActivity extends BaseActivity {
     }
     
     public void switchFragment(Fragment targetFragment, Bundle bundle) {
+        if (targetFragment instanceof TakeOutSafeGuideFragment) {
+            mMyTitleBar.setVisibility(View.VISIBLE);
+            title_new.setVisibility(View.GONE);
+        } else {
+            title_new.setVisibility(View.VISIBLE);
+            mMyTitleBar.setVisibility(View.GONE);
+        }
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         
         if (bundle != null) {

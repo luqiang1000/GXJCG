@@ -65,8 +65,8 @@ public class MainActivity extends BaseActivity {
     TextView mTvTime;
     @BindView(R.id.iv_qr_Official)
     ImageView mIvQrOfficial;
-    @BindView(R.id.tv_phone)
-    TextView mTvPhone;
+//    @BindView(R.id.tv_phone)
+//    TextView mTvPhone;
     @BindView(R.id.iv_qr_wechat)
     ImageView mIvQrWechat;
     @BindView(R.id.iv_qr_ali)
@@ -77,20 +77,20 @@ public class MainActivity extends BaseActivity {
     ImageButton mBtnTakeOut;
     @BindView(R.id.btn_guide)
     ImageButton mBtnGuide;
-    @BindView(R.id.item_save)
-    ImageTextView mItemSave;
-    @BindView(R.id.item_change)
-    ImageTextView mItemChange;
-    @BindView(R.id.item_gift)
-    ImageTextView mItemGift;
-    @BindView(R.id.tv_wx_title)
-    TextView mTvWxTitle;
-    @BindView(R.id.tv_qr_code_1)
-    TextView mTvQRCode1;
-    @BindView(R.id.tv_qr_code_2)
-    TextView mTvQRCode2;
-    @BindView(R.id.tv_device_no)
-    TextView mTvDeviceNo;
+//    @BindView(R.id.item_save)
+//    ImageTextView mItemSave;
+//    @BindView(R.id.item_change)
+//    ImageTextView mItemChange;
+//    @BindView(R.id.item_gift)
+//    ImageTextView mItemGift;
+//    @BindView(R.id.tv_wx_title)
+//    TextView mTvWxTitle;
+//    @BindView(R.id.tv_qr_code_1)
+//    TextView mTvQRCode1;
+//    @BindView(R.id.tv_qr_code_2)
+//    TextView mTvQRCode2;
+//    @BindView(R.id.tv_device_no)
+//    TextView mTvDeviceNo;
     
     public static SecondDisplay mSecondDisplay;
     
@@ -163,7 +163,7 @@ public class MainActivity extends BaseActivity {
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         Constant.MACNO = ANDROID_ID;
 //        Constant.MACNO = "14564497c08614cf";
-        mTvDeviceNo.setText("设备号: " + Constant.MACNO);
+//        mTvDeviceNo.setText("设备号: " + Constant.MACNO);
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_TIME_TICK);//每分钟变化
         intentFilter.addAction(Intent.ACTION_TIMEZONE_CHANGED);//设置了系统时区o
@@ -274,21 +274,21 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onSuccess(MainInfoBean mainInfoBean) {
                 //设置左上角二维码信息
-                mTvWxTitle.setText(mainInfoBean.data.wxcode.title);
+//                mTvWxTitle.setText(mainInfoBean.data.wxcode.title);
                 Glide.with(MainActivity.this)
                         .load(mainInfoBean.data.wxcode.value)
                         .apply(new RequestOptions().transform(new CenterCrop()))
                         .into(mIvQrOfficial);
                 //设置客服电话
-                mTvPhone.setText(String.format(ResUtil.getString(R.string.service_phone_), mainInfoBean.data.call.link));
+//                mTvPhone.setText(String.format(ResUtil.getString(R.string.service_phone_), mainInfoBean.data.call.link));
                 //设置右上角第一个二维码信息
-                mTvQRCode1.setText(mainInfoBean.data.wxpay.title);
+//                mTvQRCode1.setText(mainInfoBean.data.wxpay.title);
                 Glide.with(MainActivity.this)
                         .load(mainInfoBean.data.wxpay.value)
                         .apply(new RequestOptions().transform(new CenterCrop()))
                         .into(mIvQrWechat);
                 //设置右上角第二个二维码信息
-                mTvQRCode2.setText(mainInfoBean.data.alipay.title);
+//                mTvQRCode2.setText(mainInfoBean.data.alipay.title);
                 Glide.with(MainActivity.this)
                         .load(mainInfoBean.data.alipay.value)
                         .apply(new RequestOptions().transform(new CenterCrop()))

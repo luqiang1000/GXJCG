@@ -29,28 +29,28 @@ import java.util.List;
  */
 
 public class ProductDescriptionActivity extends BaseActivity {
-
+    
     @BindView(R.id.my_title_bar)
     MyTitleBar mMyTitleBar;
     @BindView(R.id.frame_layout)
     FrameLayout mFrameLayout;
     @BindView(R.id.top_view)
     TopView mTopView;
-
+    
     public static final String PRODUCT_DESCRIPTION_FRAGMENT = "0";
     public static final String SELF_FRAGMENT = "1";
     public static final String FRIEND_FRAGMENT = "2";
     public static final String GIFT_FRAGMENT = "3";
-
+    
     private CountDownTimerUtils mCountDownTimerUtils;
-
+    
     private MediaPlayer mMediaPlayer;
-
+    
     @Override
     protected int getLayoutID() {
         return R.layout.activity_product_description;
     }
-
+    
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +58,23 @@ public class ProductDescriptionActivity extends BaseActivity {
         initCountDownUtil();
         initFragment();
         playMedia("welcome");
-        if(MainActivity.mSecondDisplay != null)
+        if (MainActivity.mSecondDisplay != null) {
             MainActivity.mSecondDisplay.setActivity(this);
+        }
     }
-
-
-    public void playMedia(String name){
+    
+    
+    public void playMedia(String name) {
         try {
             Field idField = R.raw.class.getDeclaredField(name);
             int res = idField.getInt(idField);
-            mMediaPlayer=MediaPlayer.create(this, res);
+            mMediaPlayer = MediaPlayer.create(this, res);
             try {
                 mMediaPlayer.prepare();
-                if(mMediaPlayer.isPlaying()){
+                if (mMediaPlayer.isPlaying()) {
                     mMediaPlayer.stop();
                     mMediaPlayer.release();
-                    mMediaPlayer = MediaPlayer.create(this,res);
+                    mMediaPlayer = MediaPlayer.create(this, res);
                 }
             } catch (IllegalStateException e) {
                 e.printStackTrace();
@@ -84,9 +85,9 @@ public class ProductDescriptionActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        
     }
-
+    
     private void initCountDownUtil() {
         mCountDownTimerUtils = new CountDownTimerUtils().getCountDownTimer()
                 .setMillisInFuture(PrefUtil.getDefault().getLong("TOTAL_COUNT_DOWN_TIME", 0L))
@@ -96,19 +97,19 @@ public class ProductDescriptionActivity extends BaseActivity {
                     public void onFinish() {
                         finish();
                     }
-
+                    
                     @Override
                     public void onTick(long pMillisUntilFinished) {
                         mTopView.setCountdown((int) pMillisUntilFinished / 1000);
                     }
                 });
     }
-
+    
     private void initFragment() {
-
+        
         showFragment(0);
     }
-
+    
     public void showFragment(int index) {
         switch (index) {
             case 0:
@@ -131,8 +132,8 @@ public class ProductDescriptionActivity extends BaseActivity {
                 break;
         }
     }
-
-
+    
+    
     private void setBundle(String keyName) {
         mTopView.setTitle("");
         InstructionsFragment sendFragment = new InstructionsFragment();
@@ -141,18 +142,18 @@ public class ProductDescriptionActivity extends BaseActivity {
         sendFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, sendFragment).commit();
     }
-
-
+    
+    
     public void startCountDownTime() {
         if (mCountDownTimerUtils != null) {
             mCountDownTimerUtils.start();
         }
     }
-
+    
     public void setTopViewText(String text) {
         mTopView.setTitle(text);
     }
-
+    
     @Override
     protected void onDestroy() {
         super.onDestroy();

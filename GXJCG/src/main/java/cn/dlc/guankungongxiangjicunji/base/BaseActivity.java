@@ -3,7 +3,9 @@ package cn.dlc.guankungongxiangjicunji.base;
 import android.os.Bundle;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.umeng.analytics.MobclickAgent;
+
 import cn.dlc.commonlibrary.ui.base.BaseCommonActivity;
 
 public abstract class BaseActivity extends BaseCommonActivity {
@@ -13,7 +15,7 @@ public abstract class BaseActivity extends BaseCommonActivity {
     protected void beforeSetContentView() {
         super.beforeSetContentView();
         setTranslucentStatus(); // 沉浸状态栏
-        
+        ScreenUtils.setFullScreen(this);
     }
     
     //需要在每个Activity处理逻辑,直接在onCreate方法处理
@@ -25,6 +27,7 @@ public abstract class BaseActivity extends BaseCommonActivity {
     @Override
     public void onResume() {
         super.onResume();
+        ScreenUtils.setPortrait(this);
         String name = this.getClass().getName();
         LogUtils.e("onResume class name " + name);
         //统计时长

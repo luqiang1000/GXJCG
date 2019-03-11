@@ -34,7 +34,7 @@ import java.lang.reflect.Method;
 
 public class TakeOutPhoneWayFragment extends BaseFragment {
 
-    @BindView(R.id.btn_back)
+    @BindView(R.id.bt_back)
     Button mBtnBack;
     @BindView(R.id.et_phone)
     EditText mEtPhone;
@@ -257,10 +257,10 @@ public class TakeOutPhoneWayFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.btn_back,R.id.tv_get_password})
+    @OnClick({R.id.bt_back,R.id.tv_get_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_back:
+            case R.id.bt_back:
                 if ("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
                     ((TakeOutActivity) mActivity).closeActivity();
                 } else if ("HALF".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {

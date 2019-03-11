@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+    android:layout_marginRight="@dimen/normal_55dp"
+    android:orientation="vertical">
+    
+    <Button
+        android:id="@+id/bt_back"
+        style="@style/CommonButtonStyle"
+        android:layout_gravity="right"
+        android:text="@string/fanhui" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/normal_25dp"
+        android:gravity="right"
+        android:paddingBottom="20dp"
+        android:text="客服电话:400-000-0000"
+        android:textStyle="bold" />
+</LinearLayout>

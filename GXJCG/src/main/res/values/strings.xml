@@ -13,11 +13,11 @@
     <string name="zicunziqu">自存自取</string>
     <string name="yupengyoujiaojiewupin">与朋友交接物品</string>
     <string name="songjingxiliwu">送惊喜礼物</string>
-    <string name="butongyibingtuichu">不同意并退出</string>
+    <string name="butongyibingtuichu">退出</string>
     <string name="tongyibingjixu">同意并继续</string>
     <string name="anquanshiyongxuzhi">安全使用须知</string>
     <string name="qingxuanzeguiziguige">请选择您需要的柜子规格</string>
-    <string name="keyongshuliang">可用数量：</string>
+    <string name="keyongshuliang">剩余数量：</string>
     <string name="qingxuanzeshiyongfangshi">请选择使用方式</string>
     <string name="fanhui">返回</string>
     <string name="qingshurushoujihaomahesuijimima">请输入手机号和随机密码</string>
