@@ -10,12 +10,12 @@
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/color_dadada" />/>
+            <solid android:color="@color/color_primary_gray_light" />/>
         </shape>
     </item>
     <item android:state_selected="true">
         <shape>
-            <solid android:color="@color/color_dadada" />/>
+            <solid android:color="@color/color_primary_gray_light" />/>
         </shape>
     </item>
 

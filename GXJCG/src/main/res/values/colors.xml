@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="color_Primary">#6BB4F9</color>
+    <color name="color_Primary_light">#88c3fa</color>
+    <color name="color_Primary_dark">#5590c7</color>
+    <color name="color_primary_gray">#abc1cb</color>
+    <color name="color_primary_gray_light">#bbcdd5</color>
+    <color name="color_primary_gray_dark">#889aa2</color>
+    <color name="color_Primary_text">#FDFFFC</color>
+    
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    
     <color name="color_333">#333333</color>
     <color name="color_666">#666666</color>
     <color name="color_999">#999999</color>
     <color name="color_dadada">#dadada</color>
     <color name="color_e5e5e5">#e5e5e5</color>
     <color name="transparent">#00000000</color>
-
+    
     <color name="color_99DBFD">#99DBFD</color>
     <color name="color_FA8D0D">#FA8D0D</color>
-
+    
     <!--主颜色-->
     <color name="color_75C4EC">#75C4EC</color>
     <color name="color_DBE3E7">#DBE3E7</color>
@@ -33,5 +41,5 @@
     <color name="color_f5f5f5">#f5f5f5</color>
     <color name="color_F55007">#F55007</color>
     <color name="color_2AC43F">#2AC43F</color>
-   
+
 </resources>
