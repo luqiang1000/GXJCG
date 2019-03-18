@@ -1,1 +1,1 @@
-include ':app',':GXJCG'
+include ':app',':GXJCG', ':dlcsocketlibrary'
