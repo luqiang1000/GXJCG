@@ -31,7 +31,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dlc.vendingcabinets.Constant;
 import com.dlc.vendingcabinets.TemplateVendingCabinets;
 import com.dlc.vendingcabinets.mInterface.LogListener;
+import com.thickrongzhi.dlcvendingmachine.SerialPort.SerialPort;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -41,7 +43,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.dlc.commonlibrary.okgo.callback.Bean01Callback;
 import cn.dlc.commonlibrary.utils.PrefUtil;
-import cn.dlc.commonlibrary.utils.ResUtil;
 import cn.dlc.guankungongxiangjicunji.R;
 import cn.dlc.guankungongxiangjicunji.base.BaseActivity;
 import cn.dlc.guankungongxiangjicunji.main.MainHttp;
@@ -49,7 +50,6 @@ import cn.dlc.guankungongxiangjicunji.main.MainUrls;
 import cn.dlc.guankungongxiangjicunji.main.bean.BaseBean;
 import cn.dlc.guankungongxiangjicunji.main.bean.CountDownTiemBean;
 import cn.dlc.guankungongxiangjicunji.main.bean.MainInfoBean;
-import cn.dlc.guankungongxiangjicunji.main.widget.ImageTextView;
 
 import static java.lang.System.currentTimeMillis;
 
