@@ -56,9 +56,6 @@ public class OpenCabinetFragment extends BaseFragment {
             MainActivity.playMedia(resName);
             ((HalfSizeActivty) mActivity).setStep(6, false, false);
         }
-
-
-
         delayCloseActivity();
     }
 

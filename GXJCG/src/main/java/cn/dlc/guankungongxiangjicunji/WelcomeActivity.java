@@ -9,7 +9,7 @@ import cn.dlc.guankungongxiangjicunji.base.BaseActivity;
 import cn.dlc.guankungongxiangjicunji.hs.HalfSizeActivty;
 import cn.dlc.guankungongxiangjicunji.main.activity.MainActivity;
 
-public class WelcomeActivity extends BaseActivity {
+public class    WelcomeActivity extends BaseActivity {
     
     @Override
     protected int getLayoutID() {

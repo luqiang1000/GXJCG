@@ -130,7 +130,6 @@ public class PayFragment extends BaseFragment {
                 public void onSuccess(WxPayBean wxPayBean) {
                     dismissWaitingDialog();
                     Glide.with(mActivity).load(getQrBitmap(wxPayBean.data.code_url, R.mipmap.weixinzhifu)).into(mIvCode);
-
                 }
 
                 @Override

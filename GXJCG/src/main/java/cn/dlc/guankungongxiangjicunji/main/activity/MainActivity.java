@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -65,7 +66,7 @@ public class MainActivity extends BaseActivity {
     TextView mTvTime;
     @BindView(R.id.iv_qr_Official)
     ImageView mIvQrOfficial;
-//    @BindView(R.id.tv_phone)
+    //    @BindView(R.id.tv_phone)
 //    TextView mTvPhone;
     @BindView(R.id.iv_qr_wechat)
     ImageView mIvQrWechat;
@@ -195,7 +196,7 @@ public class MainActivity extends BaseActivity {
                     public void onSuccess(BaseBean baseBean) {
                         Log.i("Jim", baseBean.toString());
                         dismissWaitingDialog();
-//                        connectTcp();
+                        connectTcp();
                         initView();
                         showSecondDisplay();
                     }
@@ -214,20 +215,23 @@ public class MainActivity extends BaseActivity {
     }
     
     private void connectTcp() {
+        LogUtils.e(DeviceUtils.getMacAddress() + "" + DeviceUtils.getAndroidID() + " " + DeviceUtils.getModel());
 //        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
 //        Constant.MACNO = ANDROID_ID;
 ////        Constant.MACNO = "14564497c08614cf";
 //        mTvDeviceNo.setText("设备号: " + Constant.MACNO );
         //双屏，则用双屏串口地址，否则用USB地址
-        if ("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
-            //{"data":{"water":"20180804150726962818206","status":-1,"oid":"20180804150726962818206"},"type":"openDoor","msg":"出货失败，未检测到商品掉落","macno":"b44b60fa8b62ecd4"}
-            Constant.DEVICE_PATH = "/dev/ttyS1";
-        } else {
-            Constant.DEVICE_PATH = "/dev/ttyS0";
-        }
-        Constant.ADDRESS = "39.108.111.205";
+//        if ("FUll".equals(PrefUtil.getDefault().getString("Type", "FULL"))) {
+//            //{"data":{"water":"20180804150726962818206","status":-1,"oid":"20180804150726962818206"},"type":"openDoor","msg":"出货失败，未检测到商品掉落","macno":"b44b60fa8b62ecd4"}
+//            Constant.DEVICE_PATH = "/dev/ttyS1";
+//        } else {
+//            Constant.DEVICE_PATH = "/dev/ttyS0";
+//        }
+        Constant.DEVICE_PATH = "/dev/ttyS0";
+        Constant.ADDRESS = "10.105.145.18";//39.108.111.205
+        Constant.MACNO = "bf4b69e0d5e2a2bb";
         try {
-//            Constant.ADDRESS = "47.106.183.95";
+//          Constant.ADDRESS = "47.106.183.95";
             TemplateVendingCabinets.getVendingCabinets().start(Constant.MACNO, Constant.ADDRESS, Constant.PORT, Constant.DEVICE_PATH, Constant.BAUDRATE);
             //设置列数
             TemplateVendingCabinets.getVendingCabinets().setColumns(0, 6);
