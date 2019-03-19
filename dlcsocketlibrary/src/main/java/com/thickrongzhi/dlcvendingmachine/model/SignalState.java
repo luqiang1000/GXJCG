@@ -22,7 +22,7 @@ public class SignalState
     public boolean signalAuxiliaryTow;
     public String temperature;
     public String water;
-    
+    @Override
     public String toString()
     {
         StringBuilder localStringBuilder = new StringBuilder();
