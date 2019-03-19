@@ -6,7 +6,7 @@ public class HardwareResultsBean
     public int mCommands;
     public SignalOutput mSignalOutput;
     public SignalState mSignalState;
-    
+    @Override
     public String toString()
     {
         StringBuilder localStringBuilder = new StringBuilder();
