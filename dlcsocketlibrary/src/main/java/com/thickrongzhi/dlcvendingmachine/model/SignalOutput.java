@@ -4,7 +4,7 @@ public class SignalOutput
 {
     public String result;
     public String signalName;
-    
+    @Override
     public String toString()
     {
         StringBuilder localStringBuilder = new StringBuilder();
