@@ -60,9 +60,9 @@ public class SerialPort
             }
             throw new SecurityException();
         }
-        catch (Exception paramFile)
+        catch (Exception paramFile1)
         {
-            paramFile.printStackTrace();
+            paramFile1.printStackTrace();
             throw new SecurityException();
         }
     }
