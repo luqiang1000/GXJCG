@@ -46,6 +46,7 @@ public class SerialPortFinder {
         } catch (IOException localIOException) {
             localIOException.printStackTrace();
         }
+        return null;
     }
     
     Vector<Driver> getDrivers()
@@ -59,15 +60,15 @@ public class SerialPortFinder {
                     break;
                 }
                 String str = ((String) localObject).substring(0, 21).trim();
-                localObject = ((String) localObject).split(" +");
-                if ((localObject.length >= 5) && (localObject[(localObject.length - 1)].equals("serial"))) {
+                String[] localObjectSA = ((String) localObject).split(" +");
+                if ((localObjectSA.length >= 5) && (localObjectSA[(localObjectSA.length - 1)].equals("serial"))) {
                     StringBuilder localStringBuilder = new StringBuilder();
                     localStringBuilder.append("Found new driver ");
                     localStringBuilder.append(str);
                     localStringBuilder.append(" on ");
-                    localStringBuilder.append(localObject[(localObject.length - 4)]);
+                    localStringBuilder.append(localObjectSA[(localObjectSA.length - 4)]);
                     Log.d("SerialPort", localStringBuilder.toString());
-                    this.mDrivers.add(new Driver(str, localObject[(localObject.length - 4)]));
+                    this.mDrivers.add(new Driver(str, localObjectSA[(localObjectSA.length - 4)]));
                 }
             }
             localLineNumberReader.close();

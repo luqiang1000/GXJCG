@@ -44,9 +44,10 @@ public class SerialPortManager
     {
         Observable.create(new ObservableOnSubscribe()
         {
-            public void subscribe(ObservableEmitter<Object> paramAnonymousObservableEmitter)
-                    throws Exception
-            {
+            @Override
+            public void subscribe(ObservableEmitter emitter) throws Exception {
+//            public void subscribe(ObservableEmitter<Object> paramAnonymousObservableEmitter)
+//                    throws Exception
                 try
                 {
                     SerialPortManager.this.sendData(paramArrayOfByte);
@@ -54,16 +55,17 @@ public class SerialPortManager
                 catch (Exception localException)
                 {
                     localException.printStackTrace();
-                    if (!paramAnonymousObservableEmitter.isDisposed())
+                    if (!emitter.isDisposed())
                     {
-                        paramAnonymousObservableEmitter.onError(localException);
+                        emitter.onError(localException);
                         return;
                     }
                 }
-                paramAnonymousObservableEmitter.onNext(Boolean.valueOf(true));
-                paramAnonymousObservableEmitter.onComplete();
+                emitter.onNext(Boolean.valueOf(true));
+                emitter.onComplete();
             }
         });
+        return null;
     }
     
     private void sendData(byte[] paramArrayOfByte)
@@ -100,12 +102,11 @@ public class SerialPortManager
             this.mReadThread.setInputStream(this.mSerialPort.getInputStream());
             this.mReadThread.start();
             this.mOutputStream = this.mSerialPort.getOutputStream();
-            paramString1 = this.mSerialPort;
-            return paramString1;
+            return this.mSerialPort;
         }
-        catch (Throwable paramString1)
+        catch (Throwable paramString)
         {
-            Log.e("SerialPortManager=", "打开串口失败", paramString1);
+            Log.e("SerialPortManager=", "打开串口失败", paramString);
         }
         return null;
     }
@@ -119,22 +120,28 @@ public class SerialPortManager
         LogPlus.i(localStringBuilder.toString());
         Observable.just(paramCmdPack).subscribeOn(Schedulers.io()).flatMap(new Function()
         {
-            public ObservableSource<?> apply(CmdPack paramAnonymousCmdPack)
-                    throws Exception
-            {
-                return SerialPortManager.this.rxSendData(paramAnonymousCmdPack.pack());
+            @Override
+            public Object apply(Object o) throws Exception {
+//                return null;
+//            }
+//
+//            public ObservableSource<?> apply(CmdPack paramAnonymousCmdPack)
+//                    throws Exception
+//            {
+                return SerialPortManager.this.rxSendData(((CmdPack)o).pack());
             }
         }).subscribe(new Observer()
         {
+            @Override
             public void onComplete() {}
-            
+            @Override
             public void onError(Throwable paramAnonymousThrowable)
             {
                 Log.e("发送失败", paramAnonymousThrowable.toString());
             }
-            
+            @Override
             public void onNext(Object paramAnonymousObject) {}
-            
+            @Override
             public void onSubscribe(Disposable paramAnonymousDisposable) {}
         });
     }

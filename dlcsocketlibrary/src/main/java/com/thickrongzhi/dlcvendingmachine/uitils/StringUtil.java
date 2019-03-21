@@ -45,11 +45,11 @@ public class StringUtil
     
     public static String getStringFitBits(String paramString, int paramInt, Object paramObject)
     {
-        paramString = new StringBuilder(paramString);
-        while (paramString.length() < paramInt) {
-            paramString.insert(0, paramObject);
+        StringBuilder paramStringsb = new StringBuilder(paramString);
+        while (paramStringsb.length() < paramInt) {
+            paramStringsb.insert(0, paramObject);
         }
-        return paramString.toString();
+        return paramStringsb.toString();
     }
     
     public static String join(Object paramObject, Object... paramVarArgs)
@@ -67,14 +67,14 @@ public class StringUtil
     
     public static String join(String paramString, String... paramVarArgs)
     {
-        paramString = new StringBuffer(paramString);
+        StringBuffer paramStringsb = new StringBuffer(paramString);
         int j = paramVarArgs.length;
         int i = 0;
         while (i < j)
         {
-            paramString.append(paramVarArgs[i]);
+            paramStringsb.append(paramVarArgs[i]);
             i += 1;
         }
-        return paramString.toString();
+        return paramStringsb.toString();
     }
 }

@@ -1,5 +1,6 @@
 package com.thickrongzhi.dlcvendingmachine.serial;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.thickrongzhi.dlcvendingmachine.interfaces.HardwareResults;
 import com.thickrongzhi.dlcvendingmachine.model.AisleShipment;
 import com.thickrongzhi.dlcvendingmachine.model.HardwareResultsBean;
@@ -46,8 +47,8 @@ public class SerialReadThread
         Object localObject;
         switch (paramInt)
         {
-            default:
-                return localHardwareResultsBean;
+//            default:
+//                return localHardwareResultsBean;
             case 167:
                 localObject = new SignalOutput();
                 ((SignalOutput)localObject).signalName = paramString.substring(1, 2);
@@ -66,6 +67,7 @@ public class SerialReadThread
                 ((AisleShipment)localObject).control = paramString.substring(15, paramString.length());
                 localHardwareResultsBean.mAisleShipment = ((AisleShipment)localObject);
                 return localHardwareResultsBean;
+            default:
             localObject = new SignalState();
             ((SignalState)localObject).water = ByteUtil.hexStr2decimalStr(paramString.substring(0, 2));
             ((SignalState)localObject).shipmentState = paramString.substring(3, 4).equals("0");
@@ -124,92 +126,94 @@ public class SerialReadThread
         return localArrayList;
     }
     
-    private void onDataReceive(byte[] paramArrayOfByte, int paramInt)
-    {
-        try
-        {
-            System.arraycopy(paramArrayOfByte, 0, this.buffer, this.currentSize, paramInt);
-            this.currentSize += paramInt;
-            paramInt = 0;
-            int i;
-            label352:
-            for (;;)
-            {
-                i = paramInt;
-                if (paramInt >= this.currentSize) {
-                    break label355;
-                }
-                i = paramInt;
-                if (this.currentSize - paramInt < this.MIN_SIZE) {
-                    break label355;
-                }
-                paramArrayOfByte = this.buffer;
-                i = paramInt + 1;
-                if (paramArrayOfByte[paramInt] != this.FRAME_HEAD_0)
-                {
-                    paramInt = i;
-                }
-                else
-                {
-                    paramArrayOfByte = this.buffer;
-                    paramInt = i + 1;
-                    if (paramArrayOfByte[i] == this.FRAME_HEAD_1)
-                    {
-                        i = paramInt - 2;
-                        int j = (int)ByteUtil.hexStr2decimal(ByteUtil.bytes2HexStr(this.buffer, this.SLEN + i, this.SLEN_BYTE));
-                        int k = this.MIN_SIZE + j - this.COMMAND_BYTE;
-                        int m = i + k;
-                        if (this.currentSize >= m)
-                        {
-                            String str = ByteUtil.bytes2HexStr(this.buffer, m - this.CRC_BYTE, this.CRC_BYTE);
-                            paramArrayOfByte = new byte[k - this.CRC_BYTE];
-                            System.arraycopy(this.buffer, i, paramArrayOfByte, 0, paramArrayOfByte.length);
-                            if (this.CRC) {
-                                paramArrayOfByte = CRC16Utils.getCRC(paramArrayOfByte);
-                            } else {
-                                paramArrayOfByte = CRC16Utils.getCRC16(paramArrayOfByte);
-                            }
-                            if (!str.equals(paramArrayOfByte)) {
-                                break label352;
-                            }
-                            processReceiveData(ByteUtil.bytes2HexStr(this.buffer, this.COMMAND_LOCATION + i, this.COMMAND_BYTE), ByteUtil.bytes2HexStr(this.buffer, this.APPDATA_LOCATION + i, j - 2), ByteUtil.bytes2HexStr(this.buffer, i, k));
-                            if (this.currentSize > m)
-                            {
-                                paramArrayOfByte = new byte[this.currentSize - m];
-                                System.arraycopy(this.buffer, m, paramArrayOfByte, 0, paramArrayOfByte.length);
-                                System.arraycopy(paramArrayOfByte, 0, this.buffer, 0, paramArrayOfByte.length);
-                                this.currentSize -= m;
-                                break;
-                            }
-                            if (this.currentSize != m) {
-                                break label352;
-                            }
-                            this.currentSize = 0;
-                        }
-                        i = paramInt;
-                        break label355;
-                    }
-                }
-            }
-            label355:
-            if (i == this.currentSize) {
-                this.currentSize = 0;
-            }
-            return;
-        }
-        catch (Exception paramArrayOfByte)
-        {
-            this.currentSize = 0;
-            this.mHardwareResults.hardwareError(paramArrayOfByte.toString());
-        }
+    private void onDataReceive(byte[] paramArrayOfByte, int paramInt){
+//        try
+//        {
+            LogUtils.e("onDataReceive:"+ByteUtil.bytes2HexStr(paramArrayOfByte));
+//            System.arraycopy(paramArrayOfByte, 0, this.buffer, this.currentSize, paramInt);
+//            this.currentSize += paramInt;
+//            paramInt = 0;
+//            int i;
+//            label352:
+//            for (;;)
+//            {
+//                i = paramInt;
+//                if (paramInt >= this.currentSize) {
+//                    break label355;
+//                }
+//                i = paramInt;
+//                if (this.currentSize - paramInt < this.MIN_SIZE) {
+//                    break label355;
+//                }
+//                paramArrayOfByte = this.buffer;
+//                i = paramInt + 1;
+//                if (paramArrayOfByte[paramInt] != this.FRAME_HEAD_0)
+//                {
+//                    paramInt = i;
+//                }
+//                else
+//                {
+//                    paramArrayOfByte = this.buffer;
+//                    paramInt = i + 1;
+//                    if (paramArrayOfByte[i] == this.FRAME_HEAD_1)
+//                    {
+//                        i = paramInt - 2;
+//                        int j = (int)ByteUtil.hexStr2decimal(ByteUtil.bytes2HexStr(this.buffer, this.SLEN + i, this.SLEN_BYTE));
+//                        int k = this.MIN_SIZE + j - this.COMMAND_BYTE;
+//                        int m = i + k;
+//                        if (this.currentSize >= m)
+//                        {
+//                            String str = ByteUtil.bytes2HexStr(this.buffer, m - this.CRC_BYTE, this.CRC_BYTE);
+//                            paramArrayOfByte = new byte[k - this.CRC_BYTE];
+//                            System.arraycopy(this.buffer, i, paramArrayOfByte, 0, paramArrayOfByte.length);
+//                            String  paramArrayOfByteS;
+//                            if (this.CRC) {
+//                                paramArrayOfByteS = CRC16Utils.getCRC(paramArrayOfByte);
+//                            } else {
+//                                paramArrayOfByteS = CRC16Utils.getCRC16(paramArrayOfByte);
+//                            }
+//                            if (!str.equals(paramArrayOfByteS)) {
+//                                break label352;
+//                            }
+//                            processReceiveData(ByteUtil.bytes2HexStr(this.buffer, this.COMMAND_LOCATION + i, this.COMMAND_BYTE), ByteUtil.bytes2HexStr(this.buffer, this.APPDATA_LOCATION + i, j - 2), ByteUtil.bytes2HexStr(this.buffer, i, k));
+//                            if (this.currentSize > m)
+//                            {
+//                                paramArrayOfByte = new byte[this.currentSize - m];
+//                                System.arraycopy(this.buffer, m, paramArrayOfByte, 0, paramArrayOfByte.length);
+//                                System.arraycopy(paramArrayOfByte, 0, this.buffer, 0, paramArrayOfByte.length);
+//                                this.currentSize -= m;
+//                                break;
+//                            }
+//                            if (this.currentSize != m) {
+//                                break label352;
+//                            }
+//                            this.currentSize = 0;
+//                        }
+//                        i = paramInt;
+//                        break label355;
+//                    }
+//                }
+//            }
+//            label355:
+//            if (i == this.currentSize) {
+//                this.currentSize = 0;
+//            }
+//            return;
+//        }
+//        catch (Exception paramArrayOfByte1)
+//        {
+//            this.currentSize = 0;
+//            this.mHardwareResults.hardwareError(paramArrayOfByte1.toString());
+//        }
     }
     
     private void processReceiveData(final String paramString1, final String paramString2, final String paramString3)
     {
         Observable.unsafeCreate(new ObservableSource()
         {
-            public void subscribe(Observer<? super HardwareResultsBean> paramAnonymousObserver)
-            {
+            @Override
+            public void subscribe(Observer observer) {
+//            public void subscribe(Observer<? super HardwareResultsBean> paramAnonymousObserver){
                 StringBuilder localStringBuilder = new StringBuilder();
                 localStringBuilder.append("分发器处理=：");
                 localStringBuilder.append(paramString1);
@@ -221,31 +225,34 @@ public class SerialReadThread
                 try
                 {
                     int i = (int)ByteUtil.hexStr2decimal(paramString1);
-                    paramAnonymousObserver.onNext(SerialReadThread.this.aisleShipment(i, paramString2));
-                    paramAnonymousObserver.onComplete();
+                    observer.onNext(SerialReadThread.this.aisleShipment(i, paramString2));
+                    observer.onComplete();
                     return;
                 }
                 catch (Exception localException)
                 {
-                    paramAnonymousObserver.onError(localException);
-                    paramAnonymousObserver.onComplete();
+                    observer.onError(localException);
+                    observer.onComplete();
                     LogPlus.e(localException.toString());
                 }
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer()
         {
+            @Override
             public void onComplete() {}
-            
+            @Override
             public void onError(Throwable paramAnonymousThrowable)
             {
                 SerialReadThread.this.mHardwareResults.hardwareError(paramAnonymousThrowable.toString());
             }
-            
-            public void onNext(HardwareResultsBean paramAnonymousHardwareResultsBean)
+    
+    
+            @Override
+            public void onNext(Object paramAnonymousHardwareResultsBean)
             {
-                SerialReadThread.this.mHardwareResults.hardwareResults(paramAnonymousHardwareResultsBean);
+                SerialReadThread.this.mHardwareResults.hardwareResults((HardwareResultsBean)paramAnonymousHardwareResultsBean);
             }
-            
+            @Override
             public void onSubscribe(Disposable paramAnonymousDisposable) {}
         });
     }
@@ -263,7 +270,7 @@ public class SerialReadThread
             localIOException.printStackTrace();
         }
     }
-    
+    @Override
     public void run()
     {
         super.run();

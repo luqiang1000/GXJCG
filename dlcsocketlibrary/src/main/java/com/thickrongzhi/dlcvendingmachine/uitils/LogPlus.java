@@ -106,8 +106,6 @@ public class LogPlus
         {
             switch (paramInt)
             {
-                default:
-                    return;
                 case 6:
                     Log.e(paramString1, paramString2);
                     return;
@@ -120,14 +118,13 @@ public class LogPlus
                 case 3:
                     Log.d(paramString1, paramString2);
                     return;
+                default:
+                    Log.v(paramString1,paramString2);
+                    return;
             }
-            Log.v(paramString1, paramString2);
-            return;
         }
         switch (paramInt)
         {
-            default:
-                return;
             case 6:
                 Log.e(paramString1, paramString2, paramThrowable);
                 return;
@@ -140,8 +137,10 @@ public class LogPlus
             case 3:
                 Log.d(paramString1, paramString2, paramThrowable);
                 return;
+            default:
+                Log.v(paramString1, paramString2, paramThrowable);
+                return;
         }
-        Log.v(paramString1, paramString2, paramThrowable);
     }
     
     public static void v(String paramString)
