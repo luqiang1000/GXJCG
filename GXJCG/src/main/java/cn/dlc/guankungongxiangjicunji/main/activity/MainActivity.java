@@ -31,9 +31,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dlc.vendingcabinets.Constant;
 import com.dlc.vendingcabinets.TemplateVendingCabinets;
 import com.dlc.vendingcabinets.mInterface.LogListener;
-import com.thickrongzhi.dlcvendingmachine.SerialPort.SerialPort;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -227,7 +225,7 @@ public class MainActivity extends BaseActivity {
 //        } else {
 //            Constant.DEVICE_PATH = "/dev/ttyS0";
 //        }
-        Constant.DEVICE_PATH = "/dev/ttyS0";
+        Constant.DEVICE_PATH = "/dev/ttyS0";//.open("/dev/ttyS0","38400")
         Constant.ADDRESS = "10.105.145.18";//39.108.111.205
         Constant.MACNO = "bf4b69e0d5e2a2bb";
         try {

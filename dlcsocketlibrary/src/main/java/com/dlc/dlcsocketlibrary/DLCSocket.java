@@ -77,7 +77,7 @@ public class DLCSocket {
                         LogUtils.e("socket返回数据：" + new String(buffer));
                     }
                 } catch (Exception e) {
-                    LogUtils.e("连接异常" + e.getMessage());
+                    LogUtils.e("连接异常 " + e.getMessage());
                 } finally {
                     try {
                         cancelHeartTimer();
